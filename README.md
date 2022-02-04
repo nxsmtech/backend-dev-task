@@ -20,7 +20,7 @@
 <h2>Business logic:</h2>
 
 Online shop has product sets and products. One product can only exist within one set. Product set is published if at least one product inside the set is published.
-Set cannot contain 
+Set cannot contain 0 products.
 
 <h4>Product set consists from:</h4>
 <li>id</li>
