@@ -8,18 +8,19 @@
 <h2>Requirements:</h2>
 <li>Use PHP 7+</li>
 <li>Use OOP</li>
-<li>Follow best practices SOLID, Clean codde etc.</li>
+<li>Follow best practices SOLID, Clean code etc.</li>
 <li>Use plain PHP or Laravel</li>
 <li>Data storage solution is up to you. DB, filesystem, cache, memory... </li>
 <li>Cover code by tests. If you need use e.g. PHPUnit. There is no need to cover all code, just create a couple to show the principle</li>
  
-<h3>Addtional points will be awarded for:</h3>
+<h3>Optional requirements for which additional points will be awarded for:</h3>
 <li>Using DDD (Domain-Driven Design, Domain-Driven Design in PHP)</li>
 <li>Using Hexagonal architecture</li>
 
 <h2>Business logic:</h2>
 
 Online shop has product sets and products. One product can only exist within one set. Product set is published if at least one product inside the set is published.
+Set cannot contain 
 
 <h4>Product set consists from:</h4>
 <li>id</li>
@@ -41,8 +42,6 @@ Online shop has product sets and products. One product can only exist within one
 <li>Find product set - returns data from set, publishing state and product data within set</li>
 <li>Create product set</li>
 <li>Update product set</li>
-<li>Delete product set</li>
 <li>Find product - returns data from product, publishing state</li>
 <li>Create product</li>
 <li>Update product</li>
-<li>Delete product</li>
