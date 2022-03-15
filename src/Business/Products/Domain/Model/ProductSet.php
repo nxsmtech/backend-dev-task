@@ -18,6 +18,7 @@ class ProductSet extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_product_set', 'product_set_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'product_product_set', 'product_set_id', 'product_id')
+            ->withoutGlobalScope('published');
     }
 }

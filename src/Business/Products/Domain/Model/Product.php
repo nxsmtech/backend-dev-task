@@ -23,15 +23,10 @@ class Product extends Model
         'refurbished',
     ];
 
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'sku_code';
-    }
+    protected $casts = [
+        'sku_code' => 'integer',
+        'published' => 'boolean',
+    ];
 
     /**
      * The "booted" method of the model.

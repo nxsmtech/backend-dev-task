@@ -5,24 +5,31 @@ namespace Products\Infrastructure\Providers\DB;
 use Illuminate\Support\Collection;
 use Products\Domain\Contracts\ProvidesProductInformation;
 use Products\Domain\Model\Product;
-use Products\Infrastructure\Repositories\DatabaseProductRepository;
+use Products\Domain\Model\ProductSet;
 
 class ProductProvider implements ProvidesProductInformation
 {
-    private DatabaseProductRepository $databaseProductRepository;
-
-    public function __construct(DatabaseProductRepository $databaseProductRepository)
-    {
-        $this->databaseProductRepository = $databaseProductRepository;
-    }
-
     public function getAllProducts(): Collection
     {
-        return $this->databaseProductRepository->getAllProducts();
+        return Product::query()
+            ->withoutGlobalScope('published')
+            ->get();
     }
 
     public function getProductsBySkuCode(string $skuCode): ?Product
     {
-        return $this->databaseProductRepository->getProductsBySkuCode($skuCode);
+        return Product::query()
+            ->where('sku_code', '=', $skuCode)
+            ->first();
+    }
+
+    public function getAllProductSets(): Collection
+    {
+        return ProductSet::query()->get();
+    }
+
+    public function getProductSetById(int $productSetId): ?ProductSet
+    {
+        return ProductSet::findOrFail($productSetId);
     }
 }

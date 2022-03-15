@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Products\Domain\Contracts\ProvidesProductInformation;
 use Products\Domain\Contracts\Repositories\ProductRepositoryInterface;
 use Products\Domain\Model\Product;
+use Products\Domain\Model\ProductSet;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -24,5 +25,15 @@ class ProductRepository implements ProductRepositoryInterface
     public function getProductBySkuCode(string $skuCode): ?Product
     {
         return $this->providesProductInformation->getProductsBySkuCode($skuCode);
+    }
+
+    public function getAllProductSets(): Collection
+    {
+        return $this->providesProductInformation->getAllProductSets();
+    }
+
+    public function getProductSetById(int $productSetId): ?ProductSet
+    {
+        return $this->providesProductInformation->getProductSetById($productSetId);
     }
 }
