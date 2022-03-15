@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use Products\Domain\Contracts\ProvidesProductInformation;
 use Products\Domain\Contracts\Repositories\ProductRepositoryInterface;
 use Products\Domain\Model\Product;
-use Products\Domain\Model\ProductSet;
 
 class ProductRepository implements ProductRepositoryInterface
 {

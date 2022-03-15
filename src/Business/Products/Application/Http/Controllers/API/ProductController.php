@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Products\Application\Http\Requests\CreateProductRequest;
-use Products\Application\Http\Requests\CreateProductSetRequest;
 use Products\Application\Http\Requests\UpdateProductRequest;
-use Products\Application\Http\Requests\UpdateProductSetRequest;
 use Products\Application\Http\Resources\ProductCollectionResource;
 use Products\Application\Http\Resources\ProductResource;
-use Products\Application\Http\Resources\ProductSetCollectionResource;
-use Products\Application\Http\Resources\ProductSetResource;
 use Products\Domain\Contracts\Repositories\ProductRepositoryInterface;
 
 class ProductController extends Controller
