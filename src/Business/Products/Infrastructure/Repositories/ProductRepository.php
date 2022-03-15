@@ -27,16 +27,6 @@ class ProductRepository implements ProductRepositoryInterface
         return $this->providesProductInformation->getProductsBySkuCode($skuCode);
     }
 
-    public function getAllProductSets(): Collection
-    {
-        return $this->providesProductInformation->getAllProductSets();
-    }
-
-    public function getProductSetById(int $productSetId): ?ProductSet
-    {
-        return $this->providesProductInformation->getProductSetById($productSetId);
-    }
-
     public function createProduct(array $productAttributes): Product
     {
         return $this->providesProductInformation->createProduct($productAttributes);
@@ -45,15 +35,5 @@ class ProductRepository implements ProductRepositoryInterface
     public function updateProduct(int $productId, array $productAttributes): Product
     {
         return $this->providesProductInformation->updateProduct($productId, $productAttributes);
-    }
-
-    public function createProductSet(array $productSetAttributes): ProductSet
-    {
-        return $this->providesProductInformation->createProductSet($productSetAttributes);
-    }
-
-    public function updateProductSet(int $productSetId, array $productSetAttributes): ProductSet
-    {
-        return $this->providesProductInformation->updateProductSet($productSetId, $productSetAttributes);
     }
 }

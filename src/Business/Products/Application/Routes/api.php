@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Products\Application\Http\Controllers\API\ProductController;
+use Products\Application\Http\Controllers\API\ProductSetController;
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'getProducts']);
@@ -11,8 +12,8 @@ Route::prefix('products')->group(function () {
 });
 
 Route::prefix('sets')->group(function () {
-    Route::get('/', [ProductController::class, 'getProductSets']);
-    Route::post('/add', [ProductController::class, 'createProductSet']);
-    Route::post('/update/{productSetId}', [ProductController::class, 'updateProductSet']);
-    Route::get('/{productSetId}', [ProductController::class, 'getProductSetById']);
+    Route::get('/', [ProductSetController::class, 'getProductSets']);
+    Route::post('/add', [ProductSetController::class, 'createProductSet']);
+    Route::post('/update/{productSetId}', [ProductSetController::class, 'updateProductSet']);
+    Route::get('/{productSetId}', [ProductSetController::class, 'getProductSetById']);
 });

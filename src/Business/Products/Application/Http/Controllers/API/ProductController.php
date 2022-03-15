@@ -41,16 +41,6 @@ class ProductController extends Controller
         return new ProductCollectionResource($this->productRepository->getAllProducts());
     }
 
-    public function getProductSets(): ResourceCollection
-    {
-        return new ProductSetCollectionResource($this->productRepository->getAllProductSets());
-    }
-
-    public function getProductSetById(int $productSetId): JsonResource
-    {
-        return new ProductSetResource($this->productRepository->getProductSetById($productSetId));
-    }
-
     public function createProduct(CreateProductRequest $request): JsonResource
     {
         $validatedData = $request->validated();
@@ -63,19 +53,5 @@ class ProductController extends Controller
         $validatedData = $request->validated();
         $product = $this->productRepository->updateProduct($productId, $validatedData);
         return new ProductResource($product);
-    }
-
-    public function createProductSet(CreateProductSetRequest $request): JsonResource
-    {
-        $validatedData = $request->validated();
-        $productSet = $this->productRepository->createProductSet($validatedData);
-        return new ProductSetResource($productSet);
-    }
-
-    public function updateProductSet(UpdateProductSetRequest $request, int $productSetId): JsonResource
-    {
-        $validatedData = $request->validated();
-        $productSet = $this->productRepository->updateProductSet($productSetId, $validatedData);
-        return new ProductSetResource($productSet);
     }
 }
