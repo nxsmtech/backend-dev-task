@@ -2,6 +2,7 @@
 
 namespace Products\Domain\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Products\Infrastructure\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,28 @@ class Product extends Model
         'refurbished',
     ];
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'sku_code';
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('published', function (Builder $builder) {
+            $builder->where('published', '=', true);
+        });
+    }
+
     protected static function newFactory(): ProductFactory
     {
         return new ProductFactory();
@@ -30,5 +53,10 @@ class Product extends Model
     public function productSet(): BelongsToMany
     {
         return $this->belongsToMany(ProductSet::class);
+    }
+
+    public function scopePublished($query): Builder
+    {
+        return $query->where('published', '=', true);
     }
 }
