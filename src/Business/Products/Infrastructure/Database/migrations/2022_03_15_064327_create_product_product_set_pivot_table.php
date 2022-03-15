@@ -17,7 +17,7 @@ class CreateProductProductSetPivotTable extends Migration
             $table->bigInteger('product_id')->unsigned()->index();
             $table->bigInteger('product_set_id')->unsigned()->index();
 
-            $table->unique(['product_id', 'product_set_id']);
+            $table->unique(['product_id']);
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('product_set_id')->references('id')->on('product_sets')->onDelete('cascade');

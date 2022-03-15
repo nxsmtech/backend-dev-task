@@ -28,18 +28,6 @@ class Product extends Model
         'published' => 'boolean',
     ];
 
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('published', function (Builder $builder) {
-            $builder->where('published', '=', true);
-        });
-    }
-
     protected static function newFactory(): ProductFactory
     {
         return new ProductFactory();
