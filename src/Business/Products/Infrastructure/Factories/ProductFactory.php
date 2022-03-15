@@ -22,7 +22,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku_code' => $this->faker->randomNumber(),
+            'sku_code' => $this->faker->randomNumber(8),
             'name' => $this->faker->text(40),
             'type' => $this->faker->randomElement(Product::PRODUCT_TYPES),
             'condition' => $this->faker->randomElement(Product::PRODUCT_CONDITIONS),
