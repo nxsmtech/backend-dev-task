@@ -8,4 +8,6 @@ use Products\Domain\Model\Product;
 interface ProductRepositoryInterface
 {
     public function getAllProducts(): Collection;
+
+    public function getProductBySkuCode(string $skuCode): ?Product;
 }

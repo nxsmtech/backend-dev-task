@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Products\Application\Http\Resources\ProductCollectionResource;
 use Products\Application\Http\Resources\ProductResource;
 use Products\Domain\Contracts\Repositories\ProductRepositoryInterface;
-use Products\Domain\Model\Product;
 
 class ProductController extends Controller
 {
@@ -19,8 +18,9 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function getProductBySkuCode(Product $product): JsonResource
+    public function getProductBySkuCode(string $skuCode): JsonResource
     {
+        $product = $this->productRepository->getProductBySkuCode($skuCode);
         return new ProductResource($product);
     }
 
