@@ -15,4 +15,8 @@ interface ProvidesProductInformation
     public function getAllProductSets(): Collection;
 
     public function getProductSetById(int $productSetId): ?ProductSet;
+
+    public function createProduct(array $productAttributes): Product;
+
+    public function updateProduct(int $productId, array $productAttributes): Product;
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Products\Application\Http\Requests\CreateProductRequest;
+use Products\Application\Http\Requests\UpdateProductRequest;
 use Products\Application\Http\Resources\ProductCollectionResource;
 use Products\Application\Http\Resources\ProductResource;
 use Products\Application\Http\Resources\ProductSetCollectionResource;
@@ -45,5 +47,19 @@ class ProductController extends Controller
     public function getProductSetById(int $productSetId): JsonResource
     {
         return new ProductSetResource($this->productRepository->getProductSetById($productSetId));
+    }
+
+    public function createProduct(CreateProductRequest $request): JsonResource
+    {
+        $validatedData = $request->validated();
+        $product = $this->productRepository->createProduct($validatedData);
+        return new ProductResource($product);
+    }
+
+    public function updateProduct(UpdateProductRequest $request, int $productId): JsonResource
+    {
+        $validatedData = $request->validated();
+        $product = $this->productRepository->updateProduct($productId, $validatedData);
+        return new ProductResource($product);
     }
 }

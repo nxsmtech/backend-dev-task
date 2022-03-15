@@ -36,4 +36,14 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return $this->providesProductInformation->getProductSetById($productSetId);
     }
+
+    public function createProduct(array $productAttributes): Product
+    {
+        return $this->providesProductInformation->createProduct($productAttributes);
+    }
+
+    public function updateProduct(int $productId, array $productAttributes): Product
+    {
+        return $this->providesProductInformation->updateProduct($productId, $productAttributes);
+    }
 }

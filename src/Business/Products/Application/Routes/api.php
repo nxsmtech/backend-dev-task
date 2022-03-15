@@ -5,6 +5,8 @@ use Products\Application\Http\Controllers\API\ProductController;
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'getProducts']);
+    Route::post('/add', [ProductController::class, 'createProduct']);
+    Route::post('/update/{productId}', [ProductController::class, 'updateProduct']);
     Route::get('/{skuCode}', [ProductController::class, 'getProductBySkuCode']);
 });
 

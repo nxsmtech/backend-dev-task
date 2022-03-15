@@ -23,6 +23,17 @@ class Product extends Model
         'refurbished',
     ];
 
+    protected $fillable = [
+        'sku_code',
+        'name',
+        'type',
+        'condition',
+        'description_title',
+        'description_text',
+        'price',
+        'published',
+    ];
+
     protected $casts = [
         'sku_code' => 'integer',
         'published' => 'boolean',
