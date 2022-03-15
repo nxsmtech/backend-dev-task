@@ -2,13 +2,14 @@
 
 namespace Products\Infrastructure\Providers\DB;
 
-use InvalidArgumentException;
 use Illuminate\Support\Collection;
 use Products\Domain\Contracts\ProvidesProductInformation;
+use Products\Domain\Contracts\ProvidesProductSetInformation;
 use Products\Domain\Model\Product;
 use Products\Domain\Model\ProductSet;
+use RuntimeException;
 
-class ProductProvider implements ProvidesProductInformation
+class ProductInformationProvider implements ProvidesProductInformation, ProvidesProductSetInformation
 {
     public function getAllProducts(): Collection
     {
@@ -48,17 +49,13 @@ class ProductProvider implements ProvidesProductInformation
 
     public function createProductSet(array $productSetAttributes): ProductSet
     {
-        if (count($productSetAttributes['products']) === 0) {
-            throw new InvalidArgumentException();
-        }
-
         $products = Product::query()
             ->whereIn('id', $productSetAttributes['products'])
             ->whereDoesntHave('productSet')
             ->get();
 
         if ($products->count() === 0)  {
-            throw new InvalidArgumentException();
+            throw new RuntimeException('Invalid product information provided');
         }
 
         $productSet = new ProductSet(
@@ -76,18 +73,10 @@ class ProductProvider implements ProvidesProductInformation
     public function updateProductSet(int $productSetId, array $productSetAttributes): ProductSet
     {
         $productSet = ProductSet::findOrFail($productSetId);
-
-        if (count($productSetAttributes['products']) === 0) {
-            throw new InvalidArgumentException();
-        }
-
-        $products = Product::query()
-            ->whereIn('id', $productSetAttributes['products'])
-            ->whereDoesntHave('productSet')
-            ->get();
+        $products = $this->getProductsWithoutSets($productSetAttributes['products']);
 
         if ($products->count() === 0)  {
-            throw new InvalidArgumentException();
+            throw new RuntimeException('Invalid product information provided');
         }
 
         $productSet->name = $productSetAttributes['name'];
@@ -95,5 +84,12 @@ class ProductProvider implements ProvidesProductInformation
         $productSet->products()->sync($products->pluck('id')->toArray());
 
         return $productSet;
+    }
+
+    private function getProductsWithoutSets(array $productsIds) {
+        return Product::query()
+            ->whereIn('id', $productsIds)
+            ->whereDoesntHave('productSet')
+            ->get();
     }
 }

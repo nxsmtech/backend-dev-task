@@ -4,7 +4,6 @@ namespace Products\Domain\Contracts;
 
 use Illuminate\Support\Collection;
 use Products\Domain\Model\Product;
-use Products\Domain\Model\ProductSet;
 
 interface ProvidesProductInformation
 {
@@ -12,15 +11,7 @@ interface ProvidesProductInformation
 
     public function getProductsBySkuCode(string $skuCode): ?Product;
 
-    public function getAllProductSets(): Collection;
-
-    public function getProductSetById(int $productSetId): ?ProductSet;
-
     public function createProduct(array $productAttributes): Product;
 
     public function updateProduct(int $productId, array $productAttributes): Product;
-
-    public function createProductSet(array $productSetAttributes): ProductSet;
-
-    public function updateProductSet(int $productSetId, array $productSetAttributes): ProductSet;
 }

@@ -15,6 +15,7 @@ class CreateProductSetRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:40',
+            'products' => 'required|array',
             'products.*' => 'required|integer',
         ];
     }

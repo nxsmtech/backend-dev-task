@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Products\Domain\Contracts\ProvidesProductInformation;
 use Products\Domain\Contracts\Repositories\ProductRepositoryInterface;
 use Products\Domain\Contracts\Repositories\ProductSetRepositoryInterface;
-use Products\Infrastructure\Providers\DB\ProductProvider;
+use Products\Infrastructure\Providers\DB\ProductInformationProvider;
 use Products\Infrastructure\Repositories\ProductRepository;
 use Products\Infrastructure\Repositories\ProductSetRepository;
 
@@ -19,7 +19,7 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ProvidesProductInformation::class, ProductProvider::class);
+        $this->app->bind(ProvidesProductInformation::class, ProductInformationProvider::class);
 
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(ProductSetRepositoryInterface::class, ProductSetRepository::class);
