@@ -37,6 +37,7 @@ class Product extends Model
     protected $casts = [
         'sku_code' => 'integer',
         'published' => 'boolean',
+        'price' => 'float',
     ];
 
     protected static function newFactory(): ProductFactory
@@ -47,10 +48,5 @@ class Product extends Model
     public function productSet(): BelongsToMany
     {
         return $this->belongsToMany(ProductSet::class);
-    }
-
-    public function scopePublished($query): Builder
-    {
-        return $query->where('published', '=', true);
     }
 }
