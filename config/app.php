@@ -1,5 +1,7 @@
 <?php
 
+use Products\Application\Providers\ProductServiceProvider;
+
 return [
 
     /*
@@ -174,6 +176,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Products domain Service Providers
+         */
+
+        ProductServiceProvider::class,
 
     ],
 
