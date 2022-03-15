@@ -2,7 +2,7 @@
 
 namespace Products\Infrastructure\Providers\DB;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use InvalidArgumentException;
 use Illuminate\Support\Collection;
 use Products\Domain\Contracts\ProvidesProductInformation;
 use Products\Domain\Model\Product;
@@ -44,5 +44,56 @@ class ProductProvider implements ProvidesProductInformation
         $product = Product::findOrFail($productId);
         $product->update($productAttributes);
         return $product;
+    }
+
+    public function createProductSet(array $productSetAttributes): ProductSet
+    {
+        if (count($productSetAttributes['products']) === 0) {
+            throw new InvalidArgumentException();
+        }
+
+        $products = Product::query()
+            ->whereIn('id', $productSetAttributes['products'])
+            ->whereDoesntHave('productSet')
+            ->get();
+
+        if ($products->count() === 0)  {
+            throw new InvalidArgumentException();
+        }
+
+        $productSet = new ProductSet(
+            [
+                'name' => $productSetAttributes['name'],
+            ]
+        );
+        $productSet->save();
+
+        $productSet->products()->sync($products->pluck('id')->toArray());
+
+        return $productSet;
+    }
+
+    public function updateProductSet(int $productSetId, array $productSetAttributes): ProductSet
+    {
+        $productSet = ProductSet::findOrFail($productSetId);
+
+        if (count($productSetAttributes['products']) === 0) {
+            throw new InvalidArgumentException();
+        }
+
+        $products = Product::query()
+            ->whereIn('id', $productSetAttributes['products'])
+            ->whereDoesntHave('productSet')
+            ->get();
+
+        if ($products->count() === 0)  {
+            throw new InvalidArgumentException();
+        }
+
+        $productSet->name = $productSetAttributes['name'];
+        $productSet->save();
+        $productSet->products()->sync($products->pluck('id')->toArray());
+
+        return $productSet;
     }
 }

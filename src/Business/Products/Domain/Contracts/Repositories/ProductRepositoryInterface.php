@@ -19,4 +19,8 @@ interface ProductRepositoryInterface
     public function createProduct(array $productAttributes): Product;
 
     public function updateProduct(int $productId, array $productAttributes): Product;
+
+    public function createProductSet(array $productSetAttributes): ProductSet;
+
+    public function updateProductSet(int $productSetId, array $productSetAttributes): ProductSet;
 }

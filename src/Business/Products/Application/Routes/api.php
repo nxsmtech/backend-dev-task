@@ -12,5 +12,7 @@ Route::prefix('products')->group(function () {
 
 Route::prefix('sets')->group(function () {
     Route::get('/', [ProductController::class, 'getProductSets']);
+    Route::post('/add', [ProductController::class, 'createProductSet']);
+    Route::post('/update/{productSetId}', [ProductController::class, 'updateProductSet']);
     Route::get('/{productSetId}', [ProductController::class, 'getProductSetById']);
 });

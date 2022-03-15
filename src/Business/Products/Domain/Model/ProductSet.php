@@ -11,6 +11,10 @@ class ProductSet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     protected static function newFactory(): ProductSetFactory
     {
         return new ProductSetFactory();
